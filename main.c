@@ -1,16 +1,9 @@
 #include <stdio.h>
-
-#ifndef STB_IMAGE_IMPLEMENTATION
-#define STB_IMAGE_IMPLEMENTATION
-#include "../stb_image.h"
-#endif
-
-#ifndef STB_IMAGE_WRITE_IMPLEMENTATION
-#define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "../stb_image_write.h"
-#endif
-
 #include <stdlib.h> 
+
+#include "pre.h"
+#include "../stb_image.h"
+#include "../stb_image_write.h"
 
 #define R_GRAYSCALE 0.299
 #define G_GRAYSCALE 0.587
@@ -54,10 +47,12 @@ int main(int argc, char **argv) {
 		fprintf(stderr, "Format is invalid! ::> ./m <input_name> <output_name>\n");
 		return 1;
 	}
-	
+
 	int width, height, channels;
-	char *input_name = argv[1];
-	unsigned char *data = stbi_load(input_name, &width, &height, &channels, 0);
+	char *input_filename = argv[1];
+	char *output_filename = argv[2];  
+	
+	unsigned char *data = stbi_load(input_filename, &width, &height, &channels, 0);
 
 	if (!data) {
 		fprintf(stderr, "Failed to load image!\n");
@@ -65,8 +60,8 @@ int main(int argc, char **argv) {
 	}	
 	printf("Loaded image with size %dx%d and %d channels\n", width, height, channels);
 
-	int result = grayscale(data, width, height, channels, argv[2]);
-	if (result) printf("Grayscale image is generated with success: %d\n", result);
+	int result = grayscale(data, width, height, channels, output_filename);
+	if (result) printf("Grayscale image %s is generated!\n", output_filename);
 	else fprintf(stderr, "Grayscale function failed!\n");
 	
 	stbi_image_free(data);
