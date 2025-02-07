@@ -1,4 +1,5 @@
 #include "grayscale.h"
+#include <complex.h>
 
 int main(int argc, char **argv) {
 	
