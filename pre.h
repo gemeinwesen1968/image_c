@@ -1,7 +1,7 @@
-#ifndef STB_IMAGE_IMPLEMENTATION
-#define STB_IMAGE_IMPLEMENTATION
-#endif
+#ifndef PRE_H
+#define PRE_H
 
-#ifndef STB_IMAGE_WRITE_IMPLEMENTATION
-#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include <stdlib.h>
+#include <stdio.h>
+
 #endif
